@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { isArray, isDate } from 'util';
 
 
 @Injectable({
@@ -25,10 +24,17 @@ export class dataService {
 
     constructor(private http: HttpClient) { }
 
-    getData() {
-        return this.http.get<any>('../../assets/db-data/movieMaster.json', {
-            observe: "response"
-        });
+    getData(dataOf) {
+        if (dataOf == "movie"){
+            return this.http.get<any>('../../assets/db-data/movieMaster.json', {
+                observe: "response"
+            });
+        }
+        if ( dataOf == "series") {
+            return this.http.get<any>('../../assets/db-data/tv_Master.json', {
+                observe: "response"
+            });
+        }
     }
 
     getDataFromOmDb(imdbID) {
@@ -45,6 +51,15 @@ export class dataService {
         return this.http.get<any>(url, {
             observe: "response"
         });
+    }
+
+    getSeriesTraielr(id){
+        let apiKey = this.themoviedbAPIKeys[Math.floor(Math.random() * this.themoviedbAPIKeys.length)];
+        let url = 'https://api.themoviedb.org/3/tv/' + id + '/videos?api_key='+ apiKey +'&language=en-US';
+        return this.http.get<any>(url, {
+            observe: "response"
+        });
+
     }
 
 }

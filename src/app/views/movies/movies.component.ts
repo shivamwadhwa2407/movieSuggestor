@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { EmbedVideoService } from 'ngx-embed-video';
 import { DomSanitizer } from '@angular/platform-browser'
 import { dataService } from './../../services/data-service.service'
-import { element } from 'protractor';
 
 @Component({
     selector: 'app-movies',
@@ -30,14 +29,11 @@ export class MoviesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.name = "John Wick";
-        this.rating = "50";
         this.getData()
-
     }
 
     getData() {
-        this.dataService.getData()
+        this.dataService.getData("movie")
             .subscribe((data) => {
                 this.moviesData = data.body
                 // console.log(this.moviesData)
@@ -49,17 +45,20 @@ export class MoviesComponent implements OnInit {
                     // console.log(this.omdbResponse)
                     this.dataService.getMovieTrailer(imdbID).subscribe((data) => {
                         let trailerResults = data.body.results;
-                        console.log(trailerResults)
-
-                        for (let i=0; i<trailerResults.length; i++){
-                            console.log(i)
-                            let element = trailerResults[i]
-                            if (this.videoType.includes(element["type"].toString().toLowerCase())   && element["site"] == "YouTube" ){
-                                this.url = "https://www.youtube.com/embed/"+element["key"]
-                                this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
-                                console.log(this.safeUrl)
-                                break
-                            } 
+                        // console.log(trailerResults)
+                        if (trailerResults.length > 0) {
+                            for (let i=0; i<trailerResults.length; i++){
+                                // console.log(i)
+                                let element = trailerResults[i]
+                                if (this.videoType.includes(element["type"].toString().toLowerCase())   && element["site"] == "YouTube" ){
+                                    this.url = "https://www.youtube.com/embed/"+element["key"]
+                                    this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
+                                    // console.log(this.safeUrl)
+                                    break
+                                }
+                            }
+                        } else {
+                            this.safeUrl = undefined;
                         }
                         
                     })

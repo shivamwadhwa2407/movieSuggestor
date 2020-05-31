@@ -1,1 +1,94 @@
-<app-nav-bar></app-nav-bar>
+<div class="container mt-3 mb-5">
+    <div class="row mt-4 mb-4 justify-content-center">
+        <h2>{{omdbResponse.Title}} ({{omdbResponse.Year}})</h2>
+    </div>
+    <div class="row mb-4 ml-2 mr-2">
+        <progressbar max="10" [value]="omdbResponse.imdbRating" type="success" [striped]="false" [animate]="false">
+            <i>{{omdbResponse.imdbRating}}/10</i></progressbar>
+    </div>
+    <div class="row mt-4 mb-4 ml-2 mr-2">
+        <div class="col-md-4 col-sm-12 pb-2 pt-4">
+            <div style="margin : auto 0;">
+                <img [src]="omdbResponse.Poster" class="rounded mx-auto d-block resize" alt="Poster">
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-12 pt-2">
+            <div class="embed-responsive embed-responsive-16by9" *ngIf = "safeUrl != undefined">
+                <iframe class="embed-responsive-item" [src]="safeUrl" frameborder="0" webkitallowfullscreen
+                    mozallowfullscreen allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 ml-2 mr-2 ">
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    IMDb Rating
+                </div>
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{omdbResponse.imdbRating}}</h5>
+                  <p class="card-text">{{omdbResponse.imdbVotes}} Votes</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    Genre
+                </div>
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{omdbResponse.Genre}}</h5>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    Language
+                </div>
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{omdbResponse.Language}}</h5>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 ml-2 mr-2 ">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    {{omdbResponse.Title}} ({{omdbResponse.Year}})
+                </div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <p>{{omdbResponse.Plot}}</p>
+                    </div>
+                    <div class="row col-12 mb-2">
+                        <div class="col-md-3 col-s-12">
+                            <strong>Cast</strong>
+                        </div>
+                        <div class="col-md-9 col-s-12">
+                            {{omdbResponse.Actors}}
+                        </div>
+                    </div>
+                    <div class="row col-12 mb-2">
+                        <div class="col-md-3 col-s-12">
+                            <strong>Director(s)</strong>
+                        </div>
+                        <div class="col-md-9 col-s-12">
+                            {{omdbResponse.Director}}
+                        </div>
+                    </div>
+                    <div class="row col-12 mb-2">
+                        <div class="col-md-3 col-s-12">
+                            <strong>Writer(s)</strong>
+                        </div>
+                        <div class="col-md-9 col-s-12">
+                            {{omdbResponse.Writer}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

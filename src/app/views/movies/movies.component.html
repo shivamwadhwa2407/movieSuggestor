@@ -1,5 +1,4 @@
 <!-- <p>movies works!</p> -->
-<app-nav-bar></app-nav-bar>
 <div class="container mt-3 mb-5">
     <div class="row mt-4 mb-4 justify-content-center">
         <h2>{{omdbResponse.Title}} ({{omdbResponse.Year}})</h2>
@@ -15,7 +14,7 @@
             </div>
         </div>
         <div class="col-md-8 col-sm-12 pt-2">
-            <div class="embed-responsive embed-responsive-16by9">
+            <div class="embed-responsive embed-responsive-16by9" *ngIf = "safeUrl != undefined">
                 <iframe class="embed-responsive-item" [src]="safeUrl" frameborder="0" webkitallowfullscreen
                     mozallowfullscreen allowfullscreen>
                 </iframe>
@@ -29,9 +28,9 @@
                     IMDb Rating
                 </div>
                 <div class="card-body text-center">
-                  <h5 class="card-title">{{omdbResponse.imdbRating}}</h5>
-                  <p class="card-text">{{omdbResponse.imdbVotes}} Votes</p>
-              </div>
+                    <h5 class="card-title">{{omdbResponse.imdbRating}}</h5>
+                    <p class="card-text">{{omdbResponse.imdbVotes}} Votes</p>
+                </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 mb-4">
@@ -40,8 +39,8 @@
                     Genre
                 </div>
                 <div class="card-body text-center">
-                  <h5 class="card-title">{{omdbResponse.Genre}}</h5>
-              </div>
+                    <h5 class="card-title">{{omdbResponse.Genre}}</h5>
+                </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 mb-4">
@@ -50,8 +49,8 @@
                     Language
                 </div>
                 <div class="card-body text-center">
-                  <h5 class="card-title">{{omdbResponse.Language}}</h5>
-              </div>
+                    <h5 class="card-title">{{omdbResponse.Language}}</h5>
+                </div>
             </div>
         </div>
     </div>
