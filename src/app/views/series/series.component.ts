@@ -20,6 +20,7 @@ export class SeriesComponent implements OnInit {
     omdbResponse = {imdbRating:0}
     seriesData: Array<any> = undefined;
     videoType: Array<string> = ["teaser", "trailer"]
+    showLoader: boolean = true;
 
     constructor(
         private dataService: dataService,
@@ -45,6 +46,7 @@ export class SeriesComponent implements OnInit {
                     this.dataService.getSeriesTraielr(movieDbId).subscribe((data) => {
                         let trailerResults = data.body.results;
                         // console.log(trailerResults)
+                        this.showLoader = false;
                         if (trailerResults.length > 0) {
                             for (let i = 0; i < trailerResults.length; i++) {
                                 // console.log(i)

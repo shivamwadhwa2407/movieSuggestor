@@ -18,6 +18,7 @@ export class MoviesComponent implements OnInit {
     url = undefined;
     safeUrl = undefined;
     moviesData: Array<any> = undefined;
+    showLoader: boolean = true;
     videoType: Array<string> = ["teaser","trailer"]
     // omdbResponse = {"Title":"John Wick","Year":"2014","Rated":"R","Released":"24 Oct 2014","Runtime":"101 min","Genre":"Action, Crime, Thriller","Director":"Chad Stahelski, David Leitch","Writer":"Derek Kolstad","Actors":"Keanu Reeves, Michael Nyqvist, Alfie Allen, Willem Dafoe","Plot":"An ex-hit-man comes out of retirement to track down the gangsters that killed his dog and took everything from him.","Language":"English, Russian, Hungarian","Country":"USA, UK, China","Awards":"5 wins & 8 nominations.","Poster":"https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.4/10"},{"Source":"Rotten Tomatoes","Value":"86%"},{"Source":"Metacritic","Value":"68/100"}],"Metascore":"68","imdbRating":"7.4","imdbVotes":"505,034","imdbID":"tt2911666","Type":"movie","DVD":"03 Feb 2015","BoxOffice":"N/A","Production":"LionsGate Entertainment","Website":"N/A","Response":"True"};
     constructor(
@@ -29,7 +30,7 @@ export class MoviesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getData()
+        this.getData();
     }
 
     getData() {
@@ -45,6 +46,7 @@ export class MoviesComponent implements OnInit {
                     // console.log(this.omdbResponse)
                     this.dataService.getMovieTrailer(imdbID).subscribe((data) => {
                         let trailerResults = data.body.results;
+                        this.showLoader = false;
                         // console.log(trailerResults)
                         if (trailerResults.length > 0) {
                             for (let i=0; i<trailerResults.length; i++){
