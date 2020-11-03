@@ -39,7 +39,7 @@ export class dataService {
 
     getDataFromOmDb(imdbID) {
         let apiKey = this.omDbApiKeys[Math.floor(Math.random() * this.omDbApiKeys.length)];
-        let url = "http://www.omdbapi.com/?apikey=" + apiKey + "&i=" + imdbID;
+        let url = "https://www.omdbapi.com/?apikey=" + apiKey + "&i=" + imdbID;
         return this.http.get<any>(url, {
             observe: "response"
         });
